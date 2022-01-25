@@ -21,7 +21,8 @@ var javascripts = {
     "validator.min.js": true,
     "graph.min.js": true,
     "dynuploader.min.js": true,
-    "bbcode.min.js": true
+    "bbcode.min.js": true,
+    "mobileswipper.min.js": true
 };
 
 var css = {
