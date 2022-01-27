@@ -16,45 +16,35 @@ var javascripts = {
     "slidecontrainer.min.js": true,
     "clipboard.min.js": true,
     "pagin.min.js": true,
-    "login.min.js": true,
+    "login.min.js": false,
     "youtuber.min.js": true,
     "validator.min.js": true,
     "graph.min.js": true,
     "dynuploader.min.js": true,
     "bbcode.min.js": true,
-    "mobileswipper.min.js": true
+    "mobileswipper.min.js": false,
+    "countdown.min.js": true
 };
 
 var css = {
     "graph.min.css": javascripts["graph.min.js"],
     "dynuploader.min.css": javascripts["dynuploader.min.js"],
     "bbcode.min.css": javascripts["bbcode.min.js"],
-    "mobile.min.css": javascripts["mobile.min.js"]
-};
-var retrieveURL = function (filename) {
-    var scripts = document.getElementsByTagName('script');
-
-    if (scripts && scripts.length > 0) {
-        for (var i in scripts) {
-            if (scripts[i].src && scripts[i].src.match(new RegExp(filename + '\\.js$'))) {
-                return scripts[i].src.replace(new RegExp('(.*)' + filename + '\\.js$'), '$1');
-            }
-        }
-    }
+    "mobile.min.css": javascripts["mobile.min.js"],
+    "countdown.min.css": javascripts["countdown.min.js"]
 };
 
-var dir = retrieveURL('loader');
 
 $.each(javascripts, function (url, value) {
     if (value) {
-        $.getScript(dir + '/scripts/' + url, function () {
+        $.getScript('/content/javascripts/scripts/' + url, function () {
             console.log("Loaded: " + url);
         });
     }
 });
 
 
-$.getScript(dir + 'app.min.js', function () {
+$.getScript('/content/javascripts/app.min.js', function () {
     console.log("Loaded: " + 'app.js');
 });
 

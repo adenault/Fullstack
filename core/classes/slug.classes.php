@@ -31,7 +31,8 @@ class Slug{
 	* @param (String Name,Array Options)
 */
 	public static function _url(mixed $str, $options = array()): string {
-		$str = mb_convert_encoding(cast::_string($str), 'UTF-8', mb_list_encodings());
+
+		$str = mb_convert_encoding(cast::_string($str), 'UTF-8');
 
 		$defaults = array(
 			'delimiter' => '_',
@@ -114,7 +115,6 @@ class Slug{
 		$str = mb_substr($str, 0, ($options['limit'] ? $options['limit'] : mb_strlen($str, 'UTF-8')), 'UTF-8');
 
 		$str = trim($str, $options['delimiter']);
-
 
 		return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
 	}
