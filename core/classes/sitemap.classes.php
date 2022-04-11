@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------
-$yourSiteUrl = 'https://houstoncounty.org';
+$yourSiteUrl = 'https://https://houstoncountyal.gov';
 $outputDir = getcwd();
 
 $generator = new Sitemap($yourSiteUrl, $outputDir);

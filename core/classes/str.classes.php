@@ -312,6 +312,7 @@ class str{
 */
 	public static function _FileSize(string $bytes): string
 	{
+		$result = '';
 		$bytes = floatval($bytes);
 			$arBytes = array(
 				0 => array(

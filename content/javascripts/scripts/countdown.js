@@ -1,11 +1,27 @@
-(function (e) {
-    e.fn.countdown = function (t, n) {
+(function ($) {
+    jQuery.fn.countdown = function (t, n) {
+
+        var thisEl = $(this);
+        var r = {
+            name: 'Test',
+            date: t.date ? t.date : null,
+            format: null
+        };
+
+        t && $.extend(r, t);
+        interval = setInterval(i, 1);
+
+        myDate = r.date.split("-");
+        var newDate = new Date(myDate[2], myDate[0] - 1, myDate[1]);
+        eventDate = Math.round(newDate.getTime() / 1000);
+        currentDate = Math.floor(Date.now() / 1000);
+
+        if (eventDate > currentDate)
+            thisEl.html('<div class="countdown"><div>Countdown to Doom</div><div class="days">00</div> <div class="timeRefDays">Days</div><div class="hours">00</div><div class="timeRefHours">:</div> <div class="minutes">00</div><div class="timeRefMinutes">:</div><div class="seconds">00</div><div class="timeRefSeconds"></div> </div>');
 
         function i() {
-            eventDate = Date.parse(r.date) / 1e3;
-            currentDate = Math.floor(e.now() / 1e3);
+            currentDate = Math.floor(Date.now() / 1000);
             if (eventDate <= currentDate) {
-                n.call(this);
                 clearInterval(interval);
             }
             seconds = eventDate - currentDate;
@@ -20,7 +36,7 @@
             minutes == 1 ? thisEl.find(".timeRefMinutes").text(":") : thisEl.find(".timeRefMinutes").text(":");
             seconds == 1 ? thisEl.find(".timeRefSeconds").text("") : thisEl.find(".timeRefSeconds").text("");
             if (r.format == "on") {
-                days = String(days).length >= 2 ? days : "0" + days;
+                days = String(days).length >= 2 ? days : "0" + days + ' ';
                 hours = String(hours).length >= 2 ? hours : "0" + hours;
                 minutes = String(minutes).length >= 2 ? minutes : "0" + minutes;
                 seconds = String(seconds).length >= 2 ? seconds : "0" + seconds;
@@ -35,26 +51,8 @@
                 clearInterval(interval);
             }
         }
-        var thisEl = $(this);
-        var r = {
-            date: null,
-            format: null
-        };
-        t && $.extend(r, t);
-        thisEl.html('<div class="countdown"><div>Countdown to Doom</div><div class="days">00</div><div class="timeRefDays">Days</div><div class="hours">00</div><div class="timeRefHours">:</div> <div class="minutes">00</div><div class="timeRefMinutes">:</div><div class="seconds">00</div><div class="timeRefSeconds"></div> </div>');
 
         i();
-        interval = setInterval(i, 1e3);
+
     };
 })(jQuery);
-$(document).ready(function () {
-    function e() {
-        var e = new Date();
-        e.setDate(e.getDate());
-        dd = e.getDate();
-        mm = e.getMonth() + 1;
-        y = e.getFullYear();
-        futureFormattedDate = mm + "/" + dd + "/" + y;
-        return futureFormattedDate;
-    }
-});

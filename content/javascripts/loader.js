@@ -10,7 +10,7 @@ var javascripts = {
     "browser.min.js": true,
     "konami.min.js": false,
     "sounds.min.js": false,
-    "mobile.min.js": true,
+    "mobile.min.js": false,
     "popup.min.js": true,
     "scroller.min.js": true,
     "slidecontrainer.min.js": true,
@@ -43,10 +43,11 @@ $.each(javascripts, function (url, value) {
     }
 });
 
-
-$.getScript('/content/javascripts/app.min.js', function () {
-    console.log("Loaded: " + 'app.js');
-});
+setTimeout(() => {
+    $.getScript('/content/javascripts/app.min.js', function () {
+        console.log("Loaded: " + 'app.js');
+    });
+}, 100);
 
 $.each(css, function (url, value) {
     if (value) {

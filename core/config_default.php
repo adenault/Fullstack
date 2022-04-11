@@ -29,12 +29,12 @@ $GLOBALS['config']=array(
 	'hash'=>array(
 		'blowfish'=>'XXXXXXX',
 		'makeHash'=>array(
-			'initial'=>array('start'=>{Number},'length'=>{Number}),
-			'mid_one'=>array('start'=>{Number},'length'=>{Number}),
-			'mid_two'=>array('start'=>{Number},'length'=>{Number}),
-			'mid_three'=>array('start'=>{Number},'length'=>{Number}),
-			'last_one'=>array('start'=>{Number},'length'=>{Number}),
-			'last_two'=>array('start'=>{Number},'length'=>{Number}),
+			'initial'=>array('start'=>'{Number}','length'=>'{Number}'),
+			'mid_one'=>array('start'=>'{Number}','length'=>'{Number}'),
+			'mid_two'=>array('start'=>'{Number}','length'=>'{Number}'),
+			'mid_three'=>array('start'=>'{Number}','length'=>'{Number}'),
+			'last_one'=>array('start'=>'{Number}','length'=>'{Number}'),
+			'last_two'=>array('start'=>'{Number}','length'=>'{Number}'),
 		),
 		'auth_key'=>'40 char hash here',
 		'salt'=>'40 char hash here',
@@ -109,7 +109,7 @@ $GLOBALS['config']=array(
 		'roadbridge'=>array(
 			'name'=>'XXXXXXXXXXXXXX',
 			'email'=>'XXXXXX@XXXXXXXXXXX.XXXXXXXXX'
-		)
+		),
 		'from'=>'XXXXXXXXXXXXXXXXXXXXXXXXX'
 		),
 	'zoom'=>array(

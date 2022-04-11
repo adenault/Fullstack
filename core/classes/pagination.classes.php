@@ -32,7 +32,7 @@ class Pagination {
 				'next'=>'&#10093;&#10093;',
 				'pre' =>'&#10092;&#10092;'
 		);			
-		$this->_link 	  	= filter_var($_SERVER['PHP_SELF'], FILTER_SANITIZE_STRING);
+		$this->_link 	  	= filter_var($_SERVER['PHP_SELF'], FILTER_UNSAFE_RAW);
 		$this->_itemHtml  	= '';
 	}
        
