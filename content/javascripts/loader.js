@@ -5,7 +5,7 @@
  * (c) 2013 Korori - korori-gaming.com
  * license: http://www.opensource.org/licenses/mit-license.php
  */
-
+/*jshint esversion: 6 */
 var javascripts = {
     "browser.min.js": true,
     "konami.min.js": false,
