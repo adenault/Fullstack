@@ -6,10 +6,10 @@ $output_dir = "/content/uploads/";
 if(Input::get("action")) { 
 	$action = Input::get("action");
 	
-	switch($action) { 
+	switch($action) {
 		case "file": 
-		case "image": 
-			get_files($action); 
+		case "image":
+			get_files($action);
 			break;
 	}
 }
@@ -23,7 +23,6 @@ else if(isset($_FILES["file"]))
 
 		$extension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 		$file_name = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) . generateRandomString(0,10) .'.'.$extension;
-
 		move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir. $file_name);
 		echo "Uploaded File :".$_FILES["file"]["name"];
 	}
@@ -45,13 +44,12 @@ function generateRandomString(){
 
 function get_files($type){
 
-
 	$sql = sprintf("SELECT name,SUBSTRING_INDEX(file_path, '/', -1) as file_path,DATE_FORMAT(date, '%m/%d/%Y %h:%i:%s') as date_time FROM file WHERE type = '%s' ORDER BY date DESC,name ASC;",$type );
 
 	$aryFiles = array();
 	
 	$files = Database::getInstance()->query($sql);
-	
+
 	if($files->count() > 0){
 		
         $aryFiles['status'] = 'ok';
@@ -60,6 +58,6 @@ function get_files($type){
         $aryFiles['status'] = 'err';
         $aryFiles['result'] = '';
     }
-  echo json_encode($aryFiles);
+  echo json::encode($aryFiles);
 }
 ?>

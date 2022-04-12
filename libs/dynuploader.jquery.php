@@ -9,7 +9,7 @@ require_once 'core/init.php';
 
 class dynuploader
 {
-	/*
+/*
 	Dynamic Upload System
 */
 	function __construct()
@@ -50,4 +50,4 @@ class dynuploader
 	}
 
 };
-$jquery = new dynuploader;
+$dynuploader = new dynuploader;

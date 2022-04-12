@@ -94,21 +94,13 @@ $GLOBALS['config']=array(
 		'word_limit'=>60
 	),
 	'api'=>array(
-		'username'=>'XXXXXXXXXX',
+		'username'=>'XXXXXXXXXXXXXX',
 		'password'=>'XXXXXXXXXXXXXX'
 	),
 	'emailer'=>array(
 		'sender'=>array(
 			'name'=>'XXXXXXXXXXXXXXXXXXXX',
 			'email'=>'XXXXX@XXXXXXXXX.XXXXX'
-		),
-		'job'=>array(
-			'name'=>'Houston County',
-			'email'=>'XXXXXXXXXXX@XXXXXXXXXXX.XXXX'
-		),
-		'roadbridge'=>array(
-			'name'=>'XXXXXXXXXXXXXX',
-			'email'=>'XXXXXX@XXXXXXXXXXX.XXXXXXXXX'
 		),
 		'from'=>'XXXXXXXXXXXXXXXXXXXXXXXXX'
 		),
