@@ -44,8 +44,10 @@ function generateRandomString(){
 }
 
 function get_files($type){
-	
-	$sql = "SELECT name,SUBSTRING_INDEX(file_path, '/', -1) as file_path,DATE_FORMAT(date, '%m/%d/%Y %h:%i:%s') as date_time FROM file WHERE type = '".$type ."' ORDER BY date DESC,name ASC;";
+
+
+	$sql = sprintf("SELECT name,SUBSTRING_INDEX(file_path, '/', -1) as file_path,DATE_FORMAT(date, '%m/%d/%Y %h:%i:%s') as date_time FROM file WHERE type = '%s' ORDER BY date DESC,name ASC;",$type );
+
 	$aryFiles = array();
 	
 	$files = Database::getInstance()->query($sql);

@@ -52,7 +52,7 @@ class Blog
                 'user' => $post->user,
                 'date_post' => $post->date_posted,
                 'title' => $post->title,
-                'content' => bbcode::format($post->content, 250),
+                'content' => bbcode::format($post->content),
             ));
             $list = $blog_posts->show();
 
