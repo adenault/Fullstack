@@ -16,7 +16,6 @@ class Blog
 
     private const url = '/blog/{id}-{slug}';
 
-
     public static function getPosts(int $offset = 0, int $perpage = 5): string
     {
         $sql = sprintf("SELECT * FROM blog ORDER BY date_posted DESC LIMIT %b, %b;", $offset, $perpage);

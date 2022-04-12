@@ -1,7 +1,7 @@
 <?php
 /*
 	* Setup Date Class
-	* @Version 1.0.0
+	* @Version 1.2.1
 	* Developed by: Ami (亜美) Denault
 */
 
@@ -130,11 +130,35 @@ class Date
 
     /*
 	* Convert Numerical to Month
-	* @Since 2.2.8
+	* @Since 1.2.2
 	* @Param (String)
 */
     public static function toMonthName(int $intMonth): string
     {
         return self::setup('2020-' . $intMonth . -'01')->format('n');
+    }
+
+/*
+	* Check if Date is in Given Rage
+	* @Since 1.2.1
+	* @Param (String Date,String EndDate, String Given Date)
+*/
+    public static function inRange (string $start_date, string $end_date, string $date_from_user):bool {
+        $start_ts = strtotime(self::_sql($start_date));
+        $end_ts = strtotime(self::_sql($end_date));
+        $user_ts = strtotime(self::_sql($date_from_user));
+        return (($user_ts >= $start_ts) && ($user_ts <= $end_ts));
+    }
+
+/*
+	* Get Date/Time Difference
+	* @Since 1.2.1
+	* @Param (String)
+*/
+    public static function getDatesTimeDiff (string $from, string $to):string {
+        $from_t = strtotime(self::_sql($from));
+        $to_t = strtotime(self::_sql($to));
+        $diff = $to_t - $from_t;
+        return cast::_string(floor($diff/(60*60*24)));
     }
 }

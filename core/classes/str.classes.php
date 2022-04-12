@@ -39,7 +39,7 @@ class str{
 		return $return_options;
 	}
 	
-	public static function _APIItem($str){
+	public static function _APIItem(string $str):string {
 		$string = str_replace(' ', '-', $str); // Replaces all spaces with hyphens.
 		return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars
 	}
@@ -135,7 +135,7 @@ class str{
 	* @Since 4.0.2
 	* @Param (String string,Char List)
 */
-	public static function _rtrim (mixed$str,string $charlist = " \t\n\r\0\x0B"):string {
+	public static function _rtrim (mixed $str,string $charlist = " \t\n\r\0\x0B"):string {
 		if (is_array($str)) {
 			foreach ($str as &$s) 
 				$s = rtrim($s, $charlist);
@@ -157,7 +157,7 @@ class str{
 			
 			return $string;
 		}
-		if ($length) 
+		if ($length)
 			return substr($string, $start, $length);
 
 		return substr($string, $start);
@@ -195,6 +195,7 @@ class str{
 		return strtoupper($string);
 
 	}
+
 /*
 	* Preg Match
 	* @Since 4.0.2
@@ -221,6 +222,31 @@ class str{
 		return preg_replace($pattern, $replacement, $subject, $limit, $count);
 	}
 
+/*
+	* String Length
+	* @Since 4.0.3
+	* @Param (String)
+*/
+	public static function strlen (string $str):int {
+        if (function_exists('mb_strlen')) {
+            return mb_strlen($str, 'UTF-8');
+        } else {
+            return strlen($str);
+        }
+
+    }
+
+
+/*
+	* New Lines to Unix
+	* @Since 4.0.3
+	* @Param (String)
+*/
+	public static function newlinesToUnix(string $s):string {
+        $s = str_replace("\r\n", "\n", $s);
+        $s = str_replace("\r", "\n", $s);
+        return $s;
+    }
 /*
 	* Truncate String
 	* @Since 4.0.2
@@ -298,13 +324,37 @@ class str{
 	* @Param (String string)
 */
 	public static function _toAscii(string $string): string{
-		$ascii = array('@:#([0-9]{2,3}):@' => '&#$1;','@:amp:@' => '&amp;','@:quot:@'=>'\'');
-		foreach ($ascii as $search => $replace)
-			$string = preg_replace($search, $replace, $string);
-			
-		return $string;
+		$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $string);
+		$clean = strtolower(trim($clean, '-'));
+		$clean = preg_replace("/[\/_|+ -]+/", '-', $clean);
+		return $clean;
 	}
 
+/*
+	* To Ascii Translation
+	* @Since 4.0.3
+	* @Param (String)
+*/
+	public static function toAsciiWithTranslit(string $str):string {
+		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+		$clean = preg_replace("/[^a-zA-Z0-9\/_| -]/", '', $clean);
+		$clean = strtolower(trim($clean, '-'));
+		$clean = preg_replace("/[\/_| -]+/", '-', $clean);
+		return $clean;
+	}
+
+
+/*
+	* Sanitize URL
+	* @Since 4.0.3
+	* @Param (String)
+*/
+	public static function sanitizeUrlRigid (string $string):string {
+        $strip = array("~", "\n", "\t", "\r", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+                   "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
+                   "â€”", "â€“", "<", ">", "/", "?", ",");
+        return trim(str_replace($strip, "", strip_tags($string)));
+    }
 /*
 	* File Size Convert
 	* @Since 2.1.4
@@ -430,7 +480,12 @@ class str{
         return str_pad($number, $length, '0', STR_PAD_LEFT);
     }
 
-	public static function _striptags($string) {
+/*
+	* Strip Tags
+	* @Since 4.0.3
+	* @Param (String)
+*/
+	public static function _striptags(string $string) :string {
 		$string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
 		return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 	 }

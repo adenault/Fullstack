@@ -18,7 +18,7 @@ class Database{
 	* @since 4.0.0
 */		
 	private static $_instance = null;
-		
+
 /*
 	* Private Variables
 	* @since 4.0.0
