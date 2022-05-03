@@ -247,27 +247,30 @@ class Database{
 */
 	private function action($action,$table,$where = array(),$orders = array()):object|bool{
 		
-		if(count($where) == 3){
+		if(count($where) <> 0){
 			$operators = array('=','>','<','>=','<=');
-			$field 		= $where[0];
-			$operator   = $where[1];
-			$value 		= $where[2];
 
 			$order = '';
 			if(count($orders) == 2)
 				$order = "ORDER BY `" . $orders[0]. "` " . $orders[1];
-			
-			if(in_array($operator,$operators)){
-				$sql="{$action} FROM {$table} WHERE {$field} {$operator} ? {$order}";
-				if(!$this->query($sql,array($value))->error())
-					return $this;
+
+			$fields = array();
+			for($w=0;$w < count($where);$w++){
+				if(in_array($where[$w][1],$operators)){
+					array_push($fields,$where[$w][0] . ' '. $where[$w][1] . ' '. '"'.$where[$w][2] .'"');
+				}
 			}
+			$fields = implode(" AND ",$fields);
+			$sql="{$action} FROM {$table} WHERE {$fields} ? {$order}";
+			if(!$this->query($sql)->error())
+				return $this;
 		}
 		else if(count($orders) == 2){
 			$order = "ORDER BY `" . $orders[0]. "` " . $orders[1];
 			$sql="{$action} FROM {$table}  {$order}";
 			if(!$this->query($sql)->error())
 				return $this; 		
+		
 		}
 		else{
 			$sql="{$action} FROM {$table}";

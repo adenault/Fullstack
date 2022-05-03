@@ -21,9 +21,9 @@ class BBCODE{
 
 	public static function format(string $text): string{
 	
-		$text = html_entity_decode ($text,ENT_QUOTES,'UTF-8');				
+		$text = html_entity_decode($text,ENT_QUOTES,'UTF-8');
 	    
-		$text = str::_toAscii($text);
+
 		$bbcodes = array(
 			'/\[br\]/is' => '<br/>',
 			'/\[b\](.+?)\[\/b\]/is' => '<strong>$1</strong>',
@@ -38,7 +38,7 @@ class BBCODE{
 			'/\[left\](.+?)\[\/left\]/is' => '<div style=\'text-align:left\'>$1</div>',
 			'/\[center\](.+?)\[\/center\]/is' => '<div style=\'text-align:center\'>$1</div>',
 			'/\[right\](.+?)\[\/right\]/is' => '<div style=\'text-align:right\'>$1</div>',
-			'/\[justify\](.+?)\[\/justify\]/is' => 'divp style=\'text-align:justify\'>$1</div>',
+			'/\[justify\](.+?)\[\/justify\]/is' => '<div style=\'text-align:justify\'>$1</div>',
 			'/\[align=(left|right|center)\](.+?)\[\/align\]/is' => '<div style=\'text-align:$1\'>$2</div>',
 			'/\[faqs=(.+?)\](.+?)\[\/faqs\]/is' => '<div class="faqs"><a class="faq_question" href="#0">$1</a><div class="faq_answer"><p>$2</p></div></div>',
 			'/\[color\=(.+?)\](.+?)\[\/color\]/is' => '<span style=\'color:$1\'>$2</span>',	
@@ -65,7 +65,7 @@ class BBCODE{
 			'/\[img\](.+?)\[\/img\]/is' => 'img_src($m[1])',
 			'/\[img width=(.+?) height=(.+?)\](.+?)\[\/img\]/is' => 'img_src($m[1],$m[2],$m[3])',
 			'/\([0-9]{3}\)([-.\s])[0-9]{3}([-.\s])[0-9]{4}/is'=>'tel_href($m[1])',
-			'/[0-9]{3}([-.\s])[0-9]{3}([-.\s])[0-9]{4}/is'=>'tel_href($m[1])'
+			'/\[0-9]{3}([-.\s])[0-9]{3}([-.\s])[0-9]{4}/is'=>'tel_href($m[1])'
 		);
 		foreach ($bbcodes_fun as $search => $replace_fun){
 			$fun = explode('(',$replace_fun);
