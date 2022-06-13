@@ -56,7 +56,7 @@ class pdf
         }
     }
 
-    public function Email($options):mixed
+    public function Email($options)
     {
         $mail = new Email();
         $mail->Content_Type('html');
@@ -68,9 +68,8 @@ class pdf
 
         $mail->AddAttachment($this->_path,$options['filename'],'application/pdf');
         $mail->Subject($options['subject']);
-
+        
         $mail->Body($options['message']);
-
         $mail->send();
     }
 }

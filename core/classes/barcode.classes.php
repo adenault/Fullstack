@@ -12,18 +12,18 @@
 declare(strict_types=1);
 class barcode
 {
-    private $options;
-    private $type = 'png';
-    private $code_type = 'code128';
-    private $size = 30;
-    private $factor = 1;
-    private $data = 'test';
-    private $footer = true;
-    private $view = true;
-    private $save = false;
-    private $path = '/content/uploads/';
-    private $bgcolor = 'FFFFFF';
-    private $fgcolor = '000000';
+    private $options,
+            $type = 'png',
+            $code_type = 'code128',
+            $size = 30,
+            $factor = 1,
+            $data = 'test',
+            $footer = true,
+            $view = true,
+            $save = false,
+            $path = '/content/uploads/',
+            $bgcolor = 'FFFFFF',
+            $fgcolor = '000000';
 
     public function __construct($data)
     {

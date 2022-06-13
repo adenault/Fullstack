@@ -189,7 +189,7 @@ class Api
 
 			if ($login) {
 				$products_arr["status"]		= true;
-				$products_arr["object"]		=	"Login Session Created Successfully";
+				$products_arr["object"]		= "Login Session Created Successfully";
 				$products_arr["session"]	=  self::_SetSessionID($username, $password);
 
 				$sql = sprintf("Update " . Config::get('table/users') . " SET `ip` = '%s', `session` = '%s' WHERE `username` ='%s';",self::_GetIP(),$products_arr["session"],$username);

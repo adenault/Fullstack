@@ -18,7 +18,7 @@ class Blog
 
     public static function getPosts(int $offset = 0, int $perpage = 5): string
     {
-        $sql = sprintf("SELECT * FROM blog ORDER BY date_posted DESC LIMIT %b, %b;", $offset, $perpage);
+        $sql = sprintf("SELECT * FROM ".Config::get('table/blog') ." ORDER BY date_posted DESC LIMIT %b, %b;", $offset, $perpage);
         $posts = Database::getInstance()->query($sql);
 
         $blog_posts = new Template("blog_posts.tpl");
@@ -41,7 +41,7 @@ class Blog
         if (empty($post))
             return '';
 
-        $sql = sprintf("SELECT * FROM blog WHERE id =;", $post);
+        $sql = sprintf("SELECT * FROM ".Config::get('table/blog') ." WHERE id =%b;", $post);
         $post = Database::getInstance()->query($sql);
         $list = '';
 

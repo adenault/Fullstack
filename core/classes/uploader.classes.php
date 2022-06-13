@@ -167,8 +167,6 @@ class Uploader{
 			imagegif( $tmp_img, "{$pathToThumb}{$filename}" );
 		else
 			imagejpeg( $tmp_img, "{$pathToThumb}{$filename}" );
-		
-	
 	}
 
 

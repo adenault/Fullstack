@@ -5,21 +5,21 @@
 	* Developed by: Ami (亜美) Denault
 	* dynuploader
 */
-require_once 'core/init.php';
 
-class dynuploader
-{
+//require_once 'core/init.php';
+
+class dynuploader{
 /*
 	Dynamic Upload System
 */
-	function __construct()
+	public static function dynuploader()
 	{
 		if (Input::get('ajaxClearFile'))
-			$this->procAjaxClearFile();
+			self::procAjaxClearFile();
 		else if (Input::get('ajaxUploadFile'))
-			$this->procAjaxUploadFile();
+			self::procAjaxUploadFile();
 		else if (Input::get('ajaxMoveFile'))
-			$this->procAjaxMoveFile();
+			self::procAjaxMoveFile();
 
 		else
 			echo "Unable to view page.";
@@ -30,17 +30,17 @@ class dynuploader
 	/*
 		Dynamic Upload System
 	*/
-	private function procAjaxClearFile()
+	private static function procAjaxClearFile()
 	{
 		Uploader::ajax_clear_file($_POST['file_name']);
 	}
 
-	private function procAjaxUploadFile()
+	private static function procAjaxUploadFile()
 	{
 		Uploader::ajax_upload_file($_POST['file'], $_POST['file_data']);
 	}
 
-	private function procAjaxMoveFile()
+	private static function procAjaxMoveFile()
 	{
 		$pre_file = time();
 		if (isset($_POST['pre_file']) && !empty($_POST['pre_file']))

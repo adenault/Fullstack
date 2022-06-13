@@ -122,7 +122,7 @@ class str{
 */
 	public static function _ltrim (mixed $str,string $charlist = " \t\n\r\0\x0B"):string {
 		if (is_array($str)) {
-			foreach ($str as &$s) 
+			foreach ($str as &$s)
 				$s = ltrim($s);
 			
 			return $str;
@@ -137,7 +137,7 @@ class str{
 */
 	public static function _rtrim (mixed $str,string $charlist = " \t\n\r\0\x0B"):string {
 		if (is_array($str)) {
-			foreach ($str as &$s) 
+			foreach ($str as &$s)
 				$s = rtrim($s, $charlist);
 			
 			return $str;
@@ -163,11 +163,15 @@ class str{
 		return substr($string, $start);
 	}
 
+
+	public static function _stripBBcode(string $string):string {
+		return preg_replace('|[[\/\!]*?[^\[\]]*?]|si','',$string);
+	}
 /*
 	* To Lower
 	* @Since 4.0.2
 	* @Param (String string)
-*/	
+*/
 	public static function _strtolower (mixed $string):string {
 		return self::_tolower($string);
 	}
@@ -315,7 +319,8 @@ class str{
 			foreach ($open_tags as $tag)
 				$truncate .= "</$tag>";
 		}
-		return $truncate;
+
+		return self::_stripBBcode($truncate);
 	}
 
 /*

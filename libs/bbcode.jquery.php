@@ -15,12 +15,10 @@ if(Input::get("action")) {
 }
 else if(isset($_FILES["file"]))
 {
-		
 	if ($_FILES["file"]["error"] > 0)
 		echo "Error: " . $_FILES["file"]["error"];
 	else
 	{
-
 		$extension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 		$file_name = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) . generateRandomString(0,10) .'.'.$extension;
 		move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir. $file_name);
@@ -44,7 +42,7 @@ function generateRandomString(){
 
 function get_files($type){
 
-	$sql = sprintf("SELECT name,SUBSTRING_INDEX(file_path, '/', -1) as file_path,DATE_FORMAT(date, '%m/%d/%Y %h:%i:%s') as date_time FROM file WHERE type = '%s' ORDER BY date DESC,name ASC;",$type );
+	$sql = sprintf("SELECT name,SUBSTRING_INDEX(file_path, '/', -1) as file_path,DATE_FORMAT(date, '%m/%d/%Y %h:%i:%s') as date_time FROM " .Config::get('table/file') ." WHERE type = '%s' ORDER BY date DESC,name ASC;",$type );
 
 	$aryFiles = array();
 	
