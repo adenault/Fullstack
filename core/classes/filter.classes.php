@@ -22,17 +22,12 @@ class filter
     public static function bool(string $variable): bool
     {
         $yesList = ['ok', 'y', 'yes', 'true', 't', 'on', '1', '+'];
-        $noList = ['no', 'false', 'f', 'off', '0', 'null', 'undefined', '-', 'n'];
 
         $variable = str::_tolower($variable);
 
-        if (arr::in($variable, $yesList) || cast::_float($variable) !== 0.0)
+        if (arr::in($variable, $yesList))
             return true;
 
-
-        if (arr::in($variable, $noList))
-            return false;
-
-        return filter_var($variable, FILTER_VALIDATE_BOOLEAN);
+        return false;
     }
 }

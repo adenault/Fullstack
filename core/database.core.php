@@ -249,7 +249,6 @@ class Database
 			$this->_columnCount = 0;
 			$this->_count = 0;
 			$this->_lastinsert = 0;
-			print_r($this->_pdo->errorInfo());
 		}
 	}
 

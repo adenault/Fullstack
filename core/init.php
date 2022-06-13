@@ -128,4 +128,4 @@ $timezone = Options::get('timezone') ? Options::get('timezone') : 'America/Teguc
 if(function_exists('date_default_timezone_set'))
 	date_default_timezone_set($timezone);
 else
-   putenv("TZ=" . $timezone);
+	putenv("TZ=" . $timezone);

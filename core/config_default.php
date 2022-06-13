@@ -97,6 +97,12 @@ $GLOBALS['config']=array(
 		'username'=>'XXXXXXXXXXXXXX',
 		'password'=>'XXXXXXXXXXXXXX'
 	),
+	'ldap'=>array(
+		'server'=>'XXXXXXXXXXXXXX',
+		'port'=>'389',
+		'basedn'=>'mydomain.local',
+		'dn'=>'DC=mydomain,DC=local'
+	),
 	'emailer'=>array(
 		'sender'=>array(
 			'name'=>'XXXXXXXXXXXXXXXXXXXX',

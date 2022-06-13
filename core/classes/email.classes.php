@@ -87,9 +87,7 @@ class Email {
 
 			//Attempt to Email
 			if(!(bool)$this->_ErrorBool){
-
 				$this->_ErrorBool = false;
-
 				$this->_mailer->Subject = $this->_Subject;
 				$this->_mailer->Body = $this->_Message;
 				$this->_mailer->AltBody = 'Plain text message body for non-HTML email client. Gmail SMTP email body.';
