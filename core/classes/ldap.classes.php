@@ -125,7 +125,7 @@ class LDAP
             $info = ldap_get_entries($this->ldap_connection, $sr);
 
             for ($i = 0; $i < $info['count']; $i++) {
-                $result = myldap_delete($this->ldap_connection, $info[$i]['dn'], $recursive);
+                $result = self::deleteRecord($this->ldap_connection, $info[$i]['dn'], $recursive);
                 if (!$result) {
                     return ($result);
                 }

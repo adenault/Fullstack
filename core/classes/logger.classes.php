@@ -31,6 +31,4 @@ class Logger
         ini_set("log_errors", TRUE);
         ini_set('error_log', self::$log_file);
 	}
-
-
 }

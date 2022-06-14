@@ -181,7 +181,7 @@ class User
 			SESSION::delete($this->_sessionName);
 
 		if(Cookie::exists(Config::get('remember/cookie_name')))
-			@Cookie::delete(Config::get('remember/cookie_name'));
+			Cookie::delete(Config::get('remember/cookie_name'));
 
 	}
 
