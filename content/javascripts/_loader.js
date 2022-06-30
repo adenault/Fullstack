@@ -23,8 +23,7 @@ var javascripts = {
     "dynuploader.min.js": true,
     "bbcode.min.js": true,
     "mobileswipper.min.js": false,
-    "countdown.min.js": true,
-    "timer.min.js": true
+    "countdown.min.js": true
 };
 
 var css = {
