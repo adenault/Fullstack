@@ -37,86 +37,91 @@ class validate{
 */
 	public function check(mixed $source,array $items =array()):object{
 
-		foreach($items as $item=> $rules){
 
-			$n = @(str::_tolower($rules['name'])?$rules['name']:'Unknown');
+			foreach($items as $item=> $rules){
+				if(!is_null($source[$item])){
+					$n = @(str::_tolower($rules['name'])?$rules['name']:'Unknown');
+					foreach($rules as $rule => $rule_value){
 
-			foreach($rules as $rule => $rule_value){
+						$rule = trim($rule);
+						$value = trim($source[$item]);
+						$item  = Sanitize::escape($item);
+						
+						if(strtolower($rule) === 'required' && empty($value)){
+							$this->addError("{$n} is required.");
+						}
+						else if(!empty($value)){
+							switch($rule){
+								case 'id':
+									if(!is_numeric($value))
+										$this->addError("Unable to validate item.");
+								break;
+								case 'url':
+									if($this->url($value) === false)
+										$this->addError("{$n} invalid url.");
+								break;
+								case 'min':
+									if(strlen($value) < $rule_value)
+										$this->addError("{$n} must be a minimum of {$rule_value}.");
+								break;
+								case 'max':
+									if(strlen($value) > $rule_value)
+										$this->addError("{$n} must be a maximum of {$rule_value}.");
+								break;
+								case 'matches':
+									if($value != $source[$rule_value])
+										$this->addError("{$rule_value} must match {$item}.");
+								break;
+								case 'regex':
+									if(!preg_match($source[$rule_value],$value))
+										$this->addError("{$rule_value} must match {$item}.");
+								break;
+								case 'changed':
+									if(str::_tolower($value) != str::_tolower($rule_value)){
+										$check =$this->_db->get(Config::get('table/users'),array('username', '=',$rule_value));
 
-				$rule = trim($rule);
-				$value = trim($source[$item]);
-				$item  = Sanitize::escape($item);
-				
-				if(strtolower($rule) === 'required' && empty($value)){
-					$this->addError("{$n} is required.");
-				}
-				else if(!empty($value)){
-					switch($rule){
-						case 'id':
-							if(!is_numeric($value))
-								$this->addError("Unable to validate item.");
-						break;
-						case 'url':
-							if($this->url($value) === false)
-								$this->addError("{$n} invalid url.");
-						break;
-						case 'min':
-							if(strlen($value) < $rule_value)
-								$this->addError("{$n} must be a minimum of {$rule_value}.");
-						break;
-						case 'max':
-							if(strlen($value) > $rule_value)
-								$this->addError("{$n} must be a maximum of {$rule_value}.");
-						break;
-						case 'matches':
-							if($value != $source[$rule_value])
-								$this->addError("{$rule_value} must match {$item}.");
-						break;
-						case 'regex':
-							if(!preg_match($source[$rule_value],$value))
-								$this->addError("{$rule_value} must match {$item}.");
-						break;
-						case 'changed':
-							if(str::_tolower($value) != str::_tolower($rule_value)){
-								$check =$this->_db->get(Config::get('table/users'),array('username', '=',$rule_value));
-
-								if($check->count())
-									$this->addError("{$n} already exist.");
+										if($check->count())
+											$this->addError("{$n} already exist.");
+									}
+								break;
+								case 'equalpw':
+									if(Hash::make($value) != $rule_value)
+										$this->addError("{$n} are not the same.");
+								break;
+								case 'hashcompare':
+									if( hash('sha256',$value) != $rule_value)
+										$this->addError("{$n} are not the same.");
+								break;
+								case 'equal':
+									if($value != $rule_value)
+										$this->addError("{$n} are not the same.");
+								break;
+								case 'unique':
+									$check = $this->_db->get($rule_value,array($item, '=',$value));
+									if($check->count())
+										$this->addError("{$n} already exist.");
+								break;
+								case 'email':
+									if($this->email($value) === false)
+										$this->addError("{$n} invalid email.");
+								break;	
+								case 'recaptcha':
+									if($value === 0)
+										$this->addError("{$n} is invalid.");
+								break;
+								case 'checkaganistlower':
+									if(!in_array(str::_tolower($value),cast::_array(str::_tolower($rule_value))))
+										$this->addError("Please enter a valid option for {$n}.");
+								break;
 							}
-						break;
-						case 'equalpw':
-							if(Hash::make($value) != $rule_value)
-								$this->addError("{$n} are not the same.");
-						break;
-						case 'hashcompare':
-							if( hash('sha256',$value) != $rule_value)
-								$this->addError("{$n} are not the same.");
-						break;
-						case 'equal':
-							if($value != $rule_value)
-								$this->addError("{$n} are not the same.");
-						break;
-						case 'unique':
-							$check = $this->_db->get($rule_value,array($item, '=',$value));
-							if($check->count())
-								$this->addError("{$n} already exist.");
-						break;
-						case 'email':
-							if($this->email($value) === false)
-								$this->addError("{$n} invalid email.");
-						break;	
-						case 'recaptcha':
-							if($value === 0)
-								$this->addError("{$n} is invalid.");
-						break;
-						case 'checkaganistlower':
-							if(!in_array(str::_tolower($value),cast::_array(str::_tolower($rule_value))))
-								$this->addError("Please enter a valid option for {$n}.");
-						break;
+						}
 					}
 				}
-			}
+				else
+				$this->addError("Item not in reference.");
 		}
+
+
 		if(empty($this->_errors))
 			$this->_passed = true;
 
@@ -189,9 +194,8 @@ class validate{
 	* Validate Return Passed
 	* @since 4.0.0
 	* @Param ()
-*/	
+*/
 	public function passed():bool{
 		return $this->_passed;
 	}
 }
-?>

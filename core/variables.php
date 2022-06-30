@@ -4,7 +4,7 @@
 	Developed by: Ami Denault
 	Coded on: 15th Novemeber 2021
 */
-const _VERSION = '4.1.5';
+const _VERSION = '4.1.6';
 const DISPLAY_ERRORS = 0;
 const TRACK_ERRORS = 0;
 const HTML_ERRORS = 0;

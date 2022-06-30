@@ -318,20 +318,21 @@ class Database
 			$sql = "{$action} FROM {$table} WHERE {$fields} {$orders};";
 			if (!$this->query($sql)->error())
 				return $this;
-		} else if (count($orders) == 2) {
-			$orders = array();
+		}
+		else if (count($orders) <> 0) {
+			$orders_fields = array();
 			for ($w = 0; $w < count($orders); $w++) {
 				if (is_array($orders[$w])) {
-					array_push($orders, $orders[$w][0] . ' ' . $orders[$w][1]);
+					array_push($orders_fields, $orders[$w][0] . ' ' . $orders[$w][1]);
 				} else {
-					array_push($orders, $orders[0] . " " . $orders[1]);
+					array_push($orders_fields, $orders[0] . " " . $orders[1]);
 					break;
 				}
 			}
 
-			$orders = (count($orders) > 0 ? " ORDER BY " : "") . implode(", ", $orders);
+			$orders = (count($orders) > 0 ? " ORDER BY " : "") . implode(", ", $orders_fields);
 
-			$sql = "{$action} FROM {$table}  {$orders};";
+			$sql = "{$action} FROM {$table} {$orders};";
 			if (!$this->query($sql)->error())
 				return $this;
 		} else {

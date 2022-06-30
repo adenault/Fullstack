@@ -10,18 +10,14 @@
     left: 15px;
     z-index: 1035;
     overflow-y: auto;
-    background: #29313a;
-    transition: all 0.2s ease-in-out 0s;
+    transition: all 0.5s ease-in-out;transform-origin: left top;
+    transform: scaleY(0);
     opacity: 0;
     visibility: hidden;
     border-radius: 10px;
     padding: 10px 0px;
   }
-  @media (max-width: 992px) {
-    .mobile-nav {
-      top: 15px !important;
-    }
-  }
+
   article,
   aside,
   figcaption,
@@ -42,7 +38,6 @@
   .mobile-nav a {
     display: block;
     position: relative;
-    color: rgb(34, 34, 34);
     padding: 10px 20px;
     font-weight: 500;
     outline: none;
@@ -54,7 +49,6 @@
     top: 0px;
     left: 0px;
     position: fixed;
-    background: rgba(9, 9, 9, 0.6);
     overflow: hidden;
     display: none;
     transition: all 0.2s ease-in-out 0s;
@@ -65,7 +59,6 @@
       display: block;
       padding: 0px 20px;
       line-height: 70px;
-      background: #29313a;
       color: rgb(255, 255, 255);
       text-decoration: none;
       text-align: center;
@@ -76,7 +69,6 @@
   .mobile_bars_background {
     cursor: pointer;
     z-index: 9999;
-    display: block;
     position: fixed;
   }
   .mobile_bars {
@@ -89,7 +81,6 @@
   .bar3 {
     width: 30px;
     height: 4px;
-    background: #ff007c;
     margin: 8px 0;
     transition: 0.4s;
     cursor: pointer;
@@ -102,7 +93,7 @@
   }
   .change .bar1 {
     -webkit-transform: rotate(-45deg) translate(-17px, 13px);
-    transform: rotate(-45deg) translate(-17px, 13px);
+    transform: rotate(-45deg) translate(-22px,19px)
   }
   .change .bar2 {
     opacity: 0;
@@ -121,17 +112,16 @@
   .mobile {
       position: fixed;
       top: 0px;
-      right: 15px;
+      right: 0px;
       bottom: 0px;
-      left: 15px;
+      left: 0px;
       z-index: 1035;
       overflow-y: auto;
-      background: #29313a;
       transition: all 0.2s ease-in-out 0s;
       opacity: 0;
       visibility: hidden;
-      border-radius: 10px;
-      padding: 10px 0px;
+      padding: 0px 0px;
+      margin-bottom: 0px !important;
   }
   .mobile-nav * {
       margin: 0px;
@@ -143,11 +133,10 @@
       display: block;
       padding: 0px 20px;
       line-height: 70px;
-      background: #29313a;
       color: rgb(255, 255, 255);
       text-decoration: none;
       text-align: center;
-      font-size: 50px;
+      font-size: 26px;
   }
   
   .mobile{
