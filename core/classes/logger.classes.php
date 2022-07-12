@@ -18,7 +18,7 @@ class Logger
     public static function write($items = array(),$log_file = null){
 
         if(is_null($log_file))
-            self::$log_file = $_SERVER['DOCUMENT_ROOT'] . '/'. date::_custom(null,"Ydm").'.log';
+            self::$log_file = $_SERVER['DOCUMENT_ROOT'] . date::_custom(null,"Ydm").'.log';
 
         file_put_contents(self::$log_file, implode(PHP_EOL,$items). PHP_EOL, FILE_APPEND);
     }
@@ -26,9 +26,9 @@ class Logger
     public static function errors($log_file = null)
 	{
         if(is_null($log_file))
-            self::$log_file = $_SERVER['DOCUMENT_ROOT'] . '/'. date::_custom("Ydm").'.log';
+            self::$log_file = $_SERVER['DOCUMENT_ROOT'] .  date::_custom("Ydm").'.log';
 
-        ini_set("log_errors", TRUE);
-        ini_set('error_log', self::$log_file);
+         ini_set("log_errors", 'TRUE');
+         ini_set('error_log', self::$log_file);
 	}
 }

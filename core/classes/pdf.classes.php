@@ -66,6 +66,7 @@ class pdf
             $mail->addAddress($email);
         }
 
+
         $mail->AddAttachment($this->_path,$options['filename'],'application/pdf');
         $mail->Subject($options['subject']);
         

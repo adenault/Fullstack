@@ -19,7 +19,7 @@ class filter
 	* @Since 4.0.2
 	* @Param (String Variable)
 */
-    public static function bool(string $variable): bool
+    public static function bool(mixed $variable): bool
     {
         $yesList = ['ok', 'y', 'yes', 'true', 't', 'on', '1', '+'];
 
